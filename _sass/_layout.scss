@@ -33,6 +33,18 @@ body.sticky-bottom-footer {
   }
 }
 
+
+
+.additional-info{
+  font-size: 0.85rem;      /* 字号 */
+  font-style: italic;     /* 斜体(可删) */
+  font-weight: 600;       /* 粗细 */
+  opacity: 1;          /* 颜色淡一点 */
+  margin-top: 0.2rem;
+  line-height: 1.2;
+}
+
+
 // TODO: redefine content layout.
 
 
