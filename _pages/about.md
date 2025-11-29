@@ -20,7 +20,7 @@ I am a Statistics Phd student in UChicago. My research interest turns to AI this
 
 Before that, I graduated from the School of the Gifted Young at USTC, where I majored in Mathematics.
 
-I prefer fully open-sourced AI project, see my RL framework for diffusion language models, [dLLM-RL](https://github.com/Gen-Verse/dLLM-RL), and co-evolving RL framework for coding agents, [CURE](https://github.com/Gen-Verse/CURE).
+I prefer fully open-sourced AI projects, see my RL framework for diffusion language models, [dLLM-RL](https://github.com/Gen-Verse/dLLM-RL), and co-evolving RL framework for LLM coding agents, [CURE](https://github.com/Gen-Verse/CURE).
 
 ##### Selected Projects
 
