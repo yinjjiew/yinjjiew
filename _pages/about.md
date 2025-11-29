@@ -18,7 +18,7 @@ I am a Statistics Phd student in UChicago. My research interest turns to AI this
 
 Before that, I graduated from the School of the Gifted Young at USTC, where I majored in Mathematics.
 
-### Selected Publications
+#### Selected Publications
 
 <div class="publications">
 {%- assign years = "2025" | split: "," -%}
