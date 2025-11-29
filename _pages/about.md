@@ -6,7 +6,7 @@ profile:
   align: right
   image: photo.png
   image_circular: false # crops the image to make it circular
-  image_width: 180px
+  image_width: 160px
   address: >
 
 news: false  # includes a list of news items
@@ -18,7 +18,7 @@ I am a Statistics Phd student in UChicago. My research interest turns to AI this
 
 Before that, I graduated from the School of the Gifted Young at USTC, where I majored in Mathematics.
 
-## Selected Publications
+### Selected Publications
 
 <div class="publications">
 {%- assign years = "2025" | split: "," -%}
