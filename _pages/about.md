@@ -6,6 +6,7 @@ profile:
   align: right
   image: photo.png
   image_circular: false # crops the image to make it circular
+  image_width: 180px
   address: >
 
 news: false  # includes a list of news items
