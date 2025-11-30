@@ -23,7 +23,7 @@ Reinforcement learning is an important methodology to improve language models. W
 
 This is a simple demonstration experiment comparing different SFT methods for DLMs. Fully random masking is the commonly used SFT approach for full-attention DLMs. However, it overlooks the inherent logical structure of language, especially in reasoning tasks. Semi-AR SFT is the typical training method for block diffusion models: it applies random masks within each block while preserving block-wise causality. But applying Semi-AR training to full-attention models is slow because it requires slicing the data. We also explore trace-wise SFT, where a DLM collects its own confidence-driven trajectories and uses them for self-SFT. We find that, under comparable training time, fully random < Semi-AR < trace-wise.
 
-{% include figure.html path="assets/img/demonexp.png" title="" class="img-fluid rounded z-depth-1 w-75" %}
+{% include figure.html path="assets/img/demonexp.png" title="" class="img-fluid rounded z-depth-1 w-75 mx-auto d-block" %}
 
 ##### TraceRL
 
@@ -55,9 +55,30 @@ where the advantages are standardized based on the rewards. TraDo Instruction mo
 
 ##### Diffusion Value Model
 
-Diffusion value model provides token-wise variance-reduction baseline. In our approach, we 
+Diffusion value model provides a token-wise variance-reduction baseline. In our approach, we firstly derive step-wise rewards $r_t^{\star}$ from token-wise rewards $r_j$, and derive step-wise baseline values $V_t^{\star, old}$ from the value model’s token-wise outputs $V_j^{old}$. Specifically,
 
-{% include figure.html path="assets/img/dllmrl_variance.png" title="" class="img-fluid rounded z-depth-1 w-75 mx-auto d-block" %}
+$r_t^{\star} = \frac{1}{|\tau(t)|} \sum_{j \in \tau(t)} r_j, \,\,V_t^{\star, old} = \frac{1}{|\tau(t)|} \sum_{j \in \tau(t)} V_j^{old},$
+
+where the $V_j^{old}$ are derived from value model following the same inference trajectory of $\tau$.
+Then we can derive the step-wise returns $R_t^{\star}$ and GAE $\delta_{t}^{\star}$:
+
+$R_t^{\star} = r_t^{\star} + \gamma R_{t + 1}^{\star}, \,\,  R^{\star}_{|\tau| + 1} = 0, \,\, \delta_{t}^{\star} = r_t^{\star} - V_t^{\star, old} + \gamma V_{t + 1}^{\star, old}.$
+
+The step-wise advantages $A_t^{\star}$ is defined as:
+
+$A_t^{\star} = \sum_{k = 0}^{|\tau| - t} (\gamma \lambda)^k \delta_{t+k}^{\star}, \,\, A_{|\tau| + 1}^{\star} = 0, \,\, V_{|\tau| + 1}^{\star, old} = 0.$
+
+Finally, we obtain the token-wise quantities:
+
+$R_j = r_j + \gamma R_{t_j + 1}^{\star}, \,\, A_j = r_j - V_{j}^{old} + \gamma V_{t_j + 1}^{\star, old} + \gamma \lambda A_{t_j + 1}^{star}.$
+
+The token-wise advantages $A_j$ are used in policy model's objective function. Value model's objective function is designed to align value model's output with the token-wise returns $R_j$:
+
+$J_{\mathrm{value}}(\theta_v) = \frac{1}{2} E_{\tau} \[ \frac{1}{|\tau|} \sum_{j \in \tau} max ((V_{\theta_v}(\tau)_j - R_j)^2, (V_j^{clip} - R_j)^2) \].$
+
+See the following table, use value model to conduct the 
+
+{% include figure.html path="assets/img/dllmrl_variance.png" title="" class="img-fluid rounded z-depth-1 w-50 mx-auto d-block" %}
 
 ##### Long-CoT Models & Importance of Block Diffusion
 
