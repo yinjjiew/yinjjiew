@@ -29,29 +29,29 @@ This is a simple demonstration experiment comparing different SFT methods for DL
 
 Given the above insights, we propose **TraceRL**. For each generated response $\tau_i$ given the task $Q$, we represent it as a trajectory
 
-$$
+$
 \tau_i \triangleq \tau_i^{(1)} \cup \cdots \cup \tau_i^{(|\tau_i|)},
-$$
+$
 
 where $|\tau_i|$ is the number of decoding steps, and $\tau_i^{(t)}$ is the set of tokens decoded during the $t$-th step. TraceRL rewards or penalizes the sampling trajectory under policy $\pi_\theta$ based on the verifiable reward $r_i$ assigned to $\tau_i$. When using RLVR, $r_i$ is equivalent to the verifiable outcome.
 
 To accelerate training, we aggregate every $s$ neighboring steps. Specifically, we compress $\tau_i$ into
 
-$$
+$
 \tau_i^{s} \triangleq \tau_i^{s(1)} \cup \cdots \cup \tau_i^{s\!\left(|\tau_i^{s}|\right)},
-$$
+$
 
 where
 
-$$
+$
 \tau_i^{s(k)} \triangleq \bigcup_{j=s(k-1)+1}^{\min(sk,\,|\tau_i|)} \tau_i^{(j)},
 \qquad
 |\tau_i^{s}| = \left\lceil \frac{|\tau_i|}{s} \right\rceil .
-$$
+$
 
 The policy loss is
 
-$$
+$
 J_{\mathrm{policy}}(\theta_p)
 = \mathbb{E}_{Q \sim D_{\mathrm{task}},\, \{\tau_i\}_{i=1}^{G} \sim \pi_{\mathrm{old}}(\cdot \mid Q)}
 \Bigg(
@@ -66,7 +66,7 @@ A_i
 \right)
 \Bigg)
 - \beta\,\mathrm{KL}.
-$$
+
 
 
 
