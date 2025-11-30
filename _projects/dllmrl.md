@@ -23,7 +23,7 @@ Reinforcement learning is an important methodology to improve language models. W
 
 This is a simple demonstration experiment comparing different SFT methods for DLMs. Fully random masking is the commonly used SFT approach for full-attention DLMs. However, it overlooks the inherent logical structure of language, especially in reasoning tasks. Semi-AR SFT is the typical training method for block diffusion models: it applies random masks within each block while preserving block-wise causality. But applying Semi-AR training to full-attention models is slow because it requires slicing the data. We also explore trace-wise SFT, where a DLM collects its own confidence-driven trajectories and uses them for self-SFT. We find that, under comparable training time, fully random < Semi-AR < trace-wise.
 
-{% include figure.html path="assets/img/demonexp.png" title="" class="img-fluid rounded z-depth-1 w-60" %}
+{% include figure.html path="assets/img/demonexp.png" title="" class="img-fluid rounded z-depth-1 w-75" %}
 
 ##### TraceRL
 
@@ -60,6 +60,17 @@ A_i \right) \Bigg) - \beta\,\mathrm{KL},$
 where the advantages are standardized based on the rewards.
 
 ##### Diffusion Value Model
+
+
+
+
+
+##### Process Reward 
+
+
+
+
+
 
 
 
